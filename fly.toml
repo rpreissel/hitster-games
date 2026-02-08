@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for boardgame-timeline on 2026-02-07T20:39:54+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'boardgame-timeline'
+primary_region = 'fra'
+
+[build]
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+# WebSocket erfordert sticky sessions - nur eine Maschine verwenden
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+# Persistenter Speicher für Räume
+[mounts]
+  source = "data"
+  destination = "/app/data"
