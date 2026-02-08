@@ -1,0 +1,1 @@
+["main]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v4\n\n      - name: Install Flyctl\n        run: curl -L https://fly.io/install.sh | sh\n\n      - name: Deploy to Fly.io\n        run: flyctl deploy --remote-only\n        env:\n          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}"]
